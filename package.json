@@ -1,0 +1,23 @@
+{
+  "name": "angular-autogrowjs",
+  "version": "1.0.0",
+  "description": "Angular 2 directive for automatically growing textareas",
+  "main": "autogrow.module.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupf/angular-autogrowjs.git"
+  },
+  "author": "Mathis Hofer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hupf/angular-autogrowjs/issues"
+  },
+  "homepage": "https://github.com/hupf/angular-autogrowjs#readme",
+  "devDependencies": {
+    "@angular/core": "~2.1.0",
+    "typescript": "^2.0.0"
+  }
+}
