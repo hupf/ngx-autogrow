@@ -87,8 +87,8 @@ export class Autogrow implements AfterViewInit, AfterContentChecked, OnDestroy {
   }
 
   private updateDummy(): void {
-    const dstyle = this.dummy.style,
-      ostyle = getComputedStyle(this.el)
+    const dstyle = this.dummy.style;
+    const ostyle = this.getComputedStyle(this.el);
 
     dstyle.whiteSpace = 'pre-wrap'
     dstyle.boxSizing  = 'border-box'
