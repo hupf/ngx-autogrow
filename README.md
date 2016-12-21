@@ -9,10 +9,10 @@ Import ``AutogrowModule`` in your app or shared module:
 
     import { NgModule } from '@angular/core';
     import { AutogrowModule } from 'angular-autogrowjs';
-    
+
     @NgModule({
       imports: [
-        Autogrow
+        AutogrowModule
       ]
     })
     export class AppModule {}
