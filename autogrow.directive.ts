@@ -1,17 +1,24 @@
 import {
-  Directive, AfterViewInit, AfterContentChecked, OnDestroy, HostListener, ElementRef
+  Directive,
+  AfterViewInit,
+  AfterContentChecked,
+  OnDestroy,
+  HostListener,
+  ElementRef
 } from '@angular/core';
 
 @Directive({
   selector: 'textarea[autogrow]'
 })
-export class Autogrow implements AfterViewInit, AfterContentChecked, OnDestroy {
-  dummy: HTMLPreElement;
+export class AutogrowDirective
+    implements AfterViewInit, AfterContentChecked, OnDestroy {
+  private dummy: HTMLPreElement;
 
-  constructor(private element: ElementRef) {}
+  constructor(private element: ElementRef) {
+  }
 
-  get el(): HTMLTextAreaElement {
-    return this.element && this.element.nativeElement;
+  private get el(): HTMLTextAreaElement {
+    return this.element.nativeElement;
   }
 
   ngAfterViewInit(): void {
@@ -37,22 +44,22 @@ export class Autogrow implements AfterViewInit, AfterContentChecked, OnDestroy {
   ngOnDestroy() {
     this.el.removeAttribute('style');
     if (this.dummy) {
-      this.dummy.parentNode.removeChild(this.dummy);
+      this.dummy.parentNode!.removeChild(this.dummy);
     }
   }
 
   @HostListener('input', ['$event.target'])
-  onInput(textArea: HTMLTextAreaElement): void {
+  private onInput(textArea: HTMLTextAreaElement): void {
     this.grow();
   }
 
   @HostListener('change', ['$event.target'])
-  onChange(textArea: HTMLTextAreaElement): void {
+  private onChange(textArea: HTMLTextAreaElement): void {
     this.grow();
   }
 
-  @HostListener('keypress', ['$event.target'])
-  onKeypress(textArea: HTMLTextAreaElement): void {
+  @HostListener('keyup', ['$event.target'])
+  private onKeyup(textArea: HTMLTextAreaElement): void {
     this.grow();
   }
 
@@ -79,7 +86,7 @@ export class Autogrow implements AfterViewInit, AfterContentChecked, OnDestroy {
       if (prevEl && prevEl.classList.contains('autogrow-dummy')) {
         this.dummy = <HTMLPreElement>prevEl;
       } else {
-        this.dummy = <HTMLPreElement>this.el.parentNode.insertBefore(document.createElement('pre'),
+        this.dummy = <HTMLPreElement>this.el.parentNode!.insertBefore(document.createElement('pre'),
           this.el);
         this.dummy.classList.add('autogrow-dummy');
       }
@@ -100,21 +107,22 @@ export class Autogrow implements AfterViewInit, AfterContentChecked, OnDestroy {
     dstyle.lineHeight = ostyle.getPropertyValue('line-height');
   }
 
-  prev(el: Node): Node {
-    while (el = el.previousSibling) {
-      if (el.nodeType != 3) {
+  private prev(el: Node): Node | void {
+    let currentElement: Node | null = el;
+    while (currentElement = currentElement.previousSibling) {
+      if (currentElement.nodeType !== 3) {
         return el;
       }
     }
   }
 
-  hide(el: HTMLElement, s: boolean): void {
+  private hide(el: HTMLElement, s: boolean): void {
     el.style.display = s ? 'none' : 'inline-block';
   }
 
-  getComputedStyle(el: HTMLElement) {
+  private getComputedStyle(el: HTMLElement) {
     // FF < 4 needs a second parameter...
-    return window.getComputedStyle(el, null);
+    return window.getComputedStyle(el, null as any);
   }
 
   private escapeHTML(s: string): string {
