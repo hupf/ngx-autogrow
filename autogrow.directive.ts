@@ -1,5 +1,11 @@
+import { Subject } from 'rxjs/Subject';
+import { ISubscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+import { animationFrame } from 'rxjs/scheduler/animationFrame';
+
 import {
   Directive,
+  OnInit,
   AfterViewInit,
   AfterContentChecked,
   OnDestroy,
@@ -11,14 +17,21 @@ import {
   selector: 'textarea[autogrow]'
 })
 export class AutogrowDirective
-    implements AfterViewInit, AfterContentChecked, OnDestroy {
+    implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   private dummy: HTMLPreElement;
+  private grow$ = new Subject<void>();
+  private grower$ = this.grow$.debounceTime(100, animationFrame);
+  private growSub: ISubscription;
 
   constructor(private element: ElementRef) {
   }
 
   private get el(): HTMLTextAreaElement {
     return this.element.nativeElement;
+  }
+
+  ngOnInit(): void {
+    this.growSub = this.grower$.subscribe(() => this.grow());
   }
 
   ngAfterViewInit(): void {
@@ -34,11 +47,11 @@ export class AutogrowDirective
     this.el.style.overflow = 'hidden';
 
     this.createDummy();
-    this.grow();
+    this.grow$.next();
   }
 
   ngAfterContentChecked(): void {
-    this.grow();
+    this.grow$.next();
   }
 
   ngOnDestroy() {
@@ -50,17 +63,17 @@ export class AutogrowDirective
 
   @HostListener('input', ['$event.target'])
   private onInput(textArea: HTMLTextAreaElement): void {
-    this.grow();
+    this.grow$.next();
   }
 
   @HostListener('change', ['$event.target'])
   private onChange(textArea: HTMLTextAreaElement): void {
-    this.grow();
+    this.grow$.next();
   }
 
   @HostListener('keyup', ['$event.target'])
   private onKeyup(textArea: HTMLTextAreaElement): void {
-    this.grow();
+    this.grow$.next();
   }
 
   private grow(): void {

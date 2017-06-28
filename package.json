@@ -18,6 +18,7 @@
   "homepage": "https://github.com/hupf/angular-autogrowjs#readme",
   "devDependencies": {
     "@angular/core": "^2 || ^4",
+    "rxjs": "^5.0.0",
     "tslint": "^5.2.0",
     "typescript": "^2.0.0"
   }
