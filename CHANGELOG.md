@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+* Rename project from angular-autogrowjs to ngx-autogrow
+
 ## 1.0.2
 
 * Update dependencies (works now with Angular 2 & 4)

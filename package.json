@@ -1,5 +1,5 @@
 {
-  "name": "angular-autogrowjs",
+  "name": "ngx-autogrow",
   "version": "1.0.2",
   "description": "Angular directive for automatically growing textareas",
   "main": "index.ts",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hupf/angular-autogrowjs.git"
+    "url": "git+https://github.com/hupf/ngx-autogrow.git"
   },
   "author": "Mathis Hofer",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hupf/angular-autogrowjs/issues"
+    "url": "https://github.com/hupf/ngx-autogrow/issues"
   },
-  "homepage": "https://github.com/hupf/angular-autogrowjs#readme",
+  "homepage": "https://github.com/hupf/ngx-autogrow#readme",
   "devDependencies": {
     "@angular/core": "^2 || ^4",
     "rxjs": "^5.0.0",
