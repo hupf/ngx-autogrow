@@ -1,6 +1,6 @@
 # angular-autogrowjs
 
-Angular 2 directive for automatically height-adjusted textareas that also works within scrolling
+Angular directive for automatically height-adjusted textareas that also works within scrolling
 containers. Based on [autogrow.js](https://github.com/topaxi/autogrow.js) by Damian Senn.
 
 ## Usage
