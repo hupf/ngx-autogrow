@@ -19,9 +19,12 @@ import {
 export class AutogrowDirective
     implements OnInit, AfterViewInit, AfterContentChecked, OnDestroy {
   private dummy: HTMLPreElement;
+  private container: HTMLDivElement;
   private grow$ = new Subject<void>();
-  private grower$ = this.grow$.debounceTime(100, animationFrame);
+  private grower$ = this.grow$.debounceTime(20, animationFrame);
   private growSub: ISubscription;
+
+  private triggerGrow = () => this.grow$.next();
 
   constructor(private element: ElementRef) {
   }
@@ -97,22 +100,35 @@ export class AutogrowDirective
     if (!this.dummy) {
       const prevEl = <HTMLElement>this.prev(this.el);
       if (prevEl && prevEl.classList.contains('autogrow-dummy')) {
-        this.dummy = <HTMLPreElement>prevEl;
+        this.container = <HTMLDivElement>prevEl;
+        this.dummy = <HTMLPreElement>prevEl.firstChild;
       } else {
-        this.dummy = <HTMLPreElement>this.el.parentNode!.insertBefore(document.createElement('pre'),
+        this.container = document.createElement('div');
+        (this.container.style as any).contain = 'strict';
+        this.container.style.width = '0';
+        this.container.style.height = '0';
+        this.container.style.overflow = 'hidden';
+        this.container.style.visibility = 'hidden';
+        this.container.style.position = 'absolute';
+        this.container.style.left = '-99999px';
+        this.dummy = document.createElement('pre');
+        this.container.appendChild(this.dummy);
+        this.el.parentNode!.insertBefore(this.container,
           this.el);
-        this.dummy.classList.add('autogrow-dummy');
+        this.container.classList.add('autogrow-dummy');
       }
     }
+    this.dummy.style.position = 'absolute';
+    this.dummy.style.whiteSpace = 'pre-wrap';
+    this.dummy.style.boxSizing = 'border-box';
+    this.hide(this.dummy, true);
   }
 
   private updateDummy(): void {
     const dstyle = this.dummy.style;
     const ostyle = this.getComputedStyle(this.el);
 
-    dstyle.whiteSpace = 'pre-wrap';
-    dstyle.boxSizing  = 'border-box';
-    dstyle.wordWrap   = ostyle.getPropertyValue('word-wrap') || 'break-word';
+    dstyle.wordWrap   = ostyle.getPropertyValue('word-wrap');
     dstyle.width      = ostyle.getPropertyValue('width');
     dstyle.padding    = ostyle.getPropertyValue('padding');
     dstyle.fontFamily = ostyle.getPropertyValue('font-family');
@@ -130,7 +146,7 @@ export class AutogrowDirective
   }
 
   private hide(el: HTMLElement, s: boolean): void {
-    el.style.display = s ? 'none' : 'inline-block';
+    el.style.display = s ? 'none' : 'block';
   }
 
   private getComputedStyle(el: HTMLElement) {
