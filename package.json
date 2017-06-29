@@ -1,6 +1,6 @@
 {
   "name": "ngx-autogrow",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Angular directive for automatically growing textareas",
   "main": "index.ts",
   "scripts": {
