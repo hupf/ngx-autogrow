@@ -6,7 +6,12 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "strict": true,
+    "lib": [
+      "dom",
+      "es5"
+    ]
   },
   "exclude": ["node_modules"]
 }
