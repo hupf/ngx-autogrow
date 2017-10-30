@@ -62,6 +62,7 @@ export class AutogrowDirective
     if (this.dummy) {
       this.dummy.parentNode!.removeChild(this.dummy);
     }
+    this.growSub.unsubscribe();
   }
 
   @HostListener('input', ['$event.target'])
