@@ -23,6 +23,7 @@ export class AutogrowDirective
   private grow$ = new Subject<void>();
   private grower$ = this.grow$.debounceTime(20, animationFrame);
   private growSub: ISubscription;
+  private content: string;
 
   private triggerGrow = () => this.grow$.next();
 
@@ -84,9 +85,8 @@ export class AutogrowDirective
       return;
     }
 
-    this.updateDummy();
-
-    this.dummy.innerHTML = this.nl2br(this.escapeHTML(this.el.value)) + '<br><br>';
+    this.updateDummyStyle();
+    this.updateDummyHTML();
 
     this.hide(this.dummy, false);
 
@@ -124,7 +124,15 @@ export class AutogrowDirective
     this.hide(this.dummy, true);
   }
 
-  private updateDummy(): void {
+  private updateDummyHTML(): void {
+    const content = this.nl2br(this.escapeHTML(this.el.value)) + '<br><br>';
+
+    if (content !== this.content) {
+      this.dummy.innerHTML = this.content = content;
+    }
+  }
+
+  private updateDummyStyle(): void {
     const dstyle = this.dummy.style;
     const ostyle = this.getComputedStyle(this.el);
 
