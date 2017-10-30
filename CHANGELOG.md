@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.1
+
+* *bugfix:* Unsubscribe on destroy
+* *performance:* Only update dummy element on content change
+
 ## 2.0.0
 
 * Rename project from angular-autogrowjs to ngx-autogrow
