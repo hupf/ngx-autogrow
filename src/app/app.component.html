@@ -1,0 +1,11 @@
+<div style="position: relative">
+  <textarea autogrow #textarea1></textarea>
+  <textarea autogrow #textarea2 rows="5"></textarea>
+  <textarea autogrow #textarea3 [value]="textarea3value"></textarea>
+</div>
+
+<button (click)="
+    textarea1.value = '';
+    textarea2.value = '';
+    textarea3.value = '';
+    ">Reset</button>
