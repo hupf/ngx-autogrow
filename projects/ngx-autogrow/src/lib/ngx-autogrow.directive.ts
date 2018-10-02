@@ -28,8 +28,10 @@ export class NgxAutogrowDirective
   implements OnChanges, OnInit, DoCheck, OnDestroy {
   private readonly grow$ = new Subject<void>();
   private readonly document: Document;
+  private readonly elComputedStyle = getComputedStyle(this.el);
 
   private dummy: HTMLPreElement;
+  private dummyComputedStyle: CSSStyleDeclaration;
   private container: HTMLDivElement;
   private growSub: Unsubscribable;
   private content: string;
@@ -92,8 +94,9 @@ export class NgxAutogrowDirective
 
       hide(this.dummy, false);
 
-      const height = getComputedStyle(this.dummy).getPropertyValue('height');
-      this.el.style.height = height;
+      this.el.style.height = this.dummyComputedStyle.getPropertyValue(
+        'height'
+      );
 
       hide(this.dummy, true);
     }
@@ -119,7 +122,10 @@ export class NgxAutogrowDirective
         this.el.parentNode!.insertBefore(this.container, this.el);
         this.container.classList.add('autogrow-dummy');
       }
+
+      this.dummyComputedStyle = getComputedStyle(this.dummy);
     }
+
     this.dummy.style.position = 'absolute';
     this.dummy.style.whiteSpace = 'pre-wrap';
     this.dummy.style.boxSizing = 'border-box';
@@ -139,7 +145,7 @@ export class NgxAutogrowDirective
 
   private updateDummyStyle(): void {
     const dstyle = this.dummy.style;
-    const ostyle = getComputedStyle(this.el);
+    const ostyle = this.elComputedStyle;
 
     dstyle.wordWrap = ostyle.getPropertyValue('word-wrap');
     dstyle.width = ostyle.getPropertyValue('width');
@@ -150,7 +156,7 @@ export class NgxAutogrowDirective
   }
 
   private setMinHeight(rows: number | string) {
-    const computedStyle = getComputedStyle(this.el);
+    const computedStyle = this.elComputedStyle;
     const lineHeight =
       computedStyle.lineHeight === 'normal'
         ? `${computedStyle.fontSize} * 1.2`
