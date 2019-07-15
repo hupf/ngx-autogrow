@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1
+
+- Update dependencies (works now with Angular 8)
+
 ## 3.0.0
 
 - _bugfix:_ Fix usage with multiple growable textareas on page

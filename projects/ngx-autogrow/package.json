@@ -1,6 +1,6 @@
 {
   "name": "ngx-autogrow",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Angular directive for automatically growing textareas",
   "repository": {
     "type": "git",
@@ -13,8 +13,8 @@
   },
   "homepage": "https://github.com/hupf/ngx-autogrow#readme",
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
     "rxjs": "^6.0.0"
   }
 }
