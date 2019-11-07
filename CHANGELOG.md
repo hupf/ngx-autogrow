@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2
+
+- Update vulnerable dependencies
+
 ## 3.0.1
 
 - Update dependencies (works now with Angular 8)

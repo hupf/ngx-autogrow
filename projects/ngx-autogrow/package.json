@@ -1,6 +1,6 @@
 {
   "name": "ngx-autogrow",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Angular directive for automatically growing textareas",
   "repository": {
     "type": "git",
