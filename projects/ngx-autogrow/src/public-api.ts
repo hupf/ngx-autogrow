@@ -4,3 +4,4 @@
 
 export * from './lib/ngx-autogrow.directive';
 export * from './lib/ngx-autogrow.module';
+

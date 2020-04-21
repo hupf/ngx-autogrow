@@ -3,6 +3,14 @@
 Angular directive for automatically height-adjusted textareas that also works within scrolling
 containers. Based on [autogrow.js](https://github.com/topaxi/autogrow.js) by Damian Senn.
 
+## Compatibility
+
+Angular | ngx-autogrow
+------- | --------------
+9       | 4.x.x
+8       | 3.0.x
+4       | 1.0.2
+
 ## Usage
 
 Import `NgxAutogrowModule` in your app or shared module:

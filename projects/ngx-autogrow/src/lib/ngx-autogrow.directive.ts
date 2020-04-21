@@ -119,7 +119,9 @@ export class NgxAutogrowDirective
         this.container.style.left = '-99999px';
         this.dummy = this.document.createElement('pre');
         this.container.appendChild(this.dummy);
-        this.el.parentNode!.insertBefore(this.container, this.el);
+        if (this.el.parentNode) {
+          this.el.parentNode.insertBefore(this.container, this.el);
+        }
         this.container.classList.add('autogrow-dummy');
       }
 

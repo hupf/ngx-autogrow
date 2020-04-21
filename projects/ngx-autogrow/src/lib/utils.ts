@@ -14,6 +14,7 @@ export function nl2br(s: string): string {
 
 export function prevNode(el: Node): Node | void {
   let currentElement: Node | null = el;
+  // tslint:disable-next-line
   while ((currentElement = currentElement.previousSibling)) {
     if (currentElement.nodeType !== Node.COMMENT_NODE) {
       return el;

@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0
+
+- Update to Angular 9
+
 ## 3.0.2
 
 - Update vulnerable dependencies
